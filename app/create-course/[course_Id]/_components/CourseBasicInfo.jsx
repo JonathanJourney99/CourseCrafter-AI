@@ -3,6 +3,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { HiOutlinePuzzle } from "react-icons/hi";
 import EditCourseBasicInfo from "./EditCourseBasicInfo";
+import Link from "next/link";
 
 function CourseBasicInfo({ course, refreshData, edit = true }) {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -52,7 +53,9 @@ function CourseBasicInfo({ course, refreshData, edit = true }) {
             <HiOutlinePuzzle />
             {course?.category}
           </h2>
+          {!edit &&<Link href={'/course/'+course?.courseId+"/start"}>
           <Button className="w-full py-5 mt-4">Start</Button>
+          </Link>} 
         </div>
         <div>
           <label htmlFor="upload-image">
