@@ -12,7 +12,7 @@ function CourseStart({ params }) {
   const [course, setCourse] = useState(null);
   const [selectedChapter, setSelectedChapter] = useState(null);
   const [error, setError] = useState(null);
-  const [chapterContent, setchapterContent] = useState();
+  const [chapterContent, setchapterContent] = useState(null);
 
   // Unwrap params directly
   const courseIdParam = React.use(params);
@@ -58,7 +58,7 @@ function CourseStart({ params }) {
     const result= await db.select().from(Chapters)
     .where(and(eq(Chapters.chapterId, ChapterId), 
     eq(Chapters.courseId, course?.courseId)));
-    setchapterContent(result[0]);
+    setchapterContent(result[0]); 
     console.log(result[0]);
 
   }

@@ -6,12 +6,11 @@ import Link from "next/link";
 function Header() {
   return (
     <div className="flex justify-between p-3 shadow-sm">
-      <Image src={"/logo2.png"} width={80} height={30} alt="logo"/>
-      {/* <Link href={'/dashboard'}>
-      <Button>Get Started</Button>
-      </Link> */}
+      <Link href={"/"}>
+        <Image src={"/logo2.png"} width={80} height={30} alt="logo" />
+      </Link>
     </div>
-  );  
+  );
 }
 
 export default Header;

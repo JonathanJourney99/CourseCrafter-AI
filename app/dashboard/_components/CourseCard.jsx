@@ -8,16 +8,17 @@ import { CourseList } from "@/configs/schema";
 import { eq } from "drizzle-orm";
 import Link from "next/link";
 
-function CourseCard({ course, refreshData }) {
-  const handleOnDelete =async()=>{
-    const resp= await db.delete(CourseList)
-    .where(eq(CourseList?.id, course?.id))
-    .returning({id:CourseList?.id})
+function CourseCard({ course, refreshData, displayUser = false }) {
+  const handleOnDelete = async () => {
+    const resp = await db
+      .delete(CourseList)
+      .where(eq(CourseList?.id, course?.id))
+      .returning({ id: CourseList?.id });
 
-    if(resp){
-      refreshData()
+    if (resp) {
+      refreshData();
     }
-  }
+  };
   let categoryImage;
   switch (course?.courseOutput?.course?.category.toLowerCase()) {
     case "programming":
@@ -35,22 +36,21 @@ function CourseCard({ course, refreshData }) {
 
   return (
     <div className="shadow-sm rounded-lg border p-2 cursor-pointer hover:border-primary">
-      <Link href={'/course/'+course?.courseId}>
-      <Image
-        src={categoryImage}
-        width={300}
-        height={200}
-        alt="banner"
-        className="w-full h-[200px] object-cover"
-      />
+      <Link href={"/course/" + course?.courseId}>
+        <Image
+          src={categoryImage}
+          width={300}
+          height={200}
+          alt="banner"
+          className="w-full h-[200px] object-cover"
+        />
       </Link>
       <div className="p-2">
         <h2 className="font-medium text-lg flex justify-between items-center">
           {course?.courseOutput?.course?.name}
-          <DropDown
-          handleOnDelete={()=>handleOnDelete()}>
+          {!displayUser&&<DropDown handleOnDelete={() => handleOnDelete()}>
             <HiMiniEllipsisVertical />
-          </DropDown>
+          </DropDown>}
         </h2>
         <p className="text-sm text-gray-400">
           {course?.courseOutput?.course?.category}
@@ -64,6 +64,17 @@ function CourseCard({ course, refreshData }) {
             {course?.level}
           </h2>
         </div>
+       {displayUser&& <div className="flex gap-2 items-center mt-2">
+          <Image
+            src={course?.userProfileImage}
+            width={35}
+            height={35}
+            alt="user-profile-image"
+            className="rounded-full"
+           
+          />
+          <h2 className="text-sm">{course?.username}</h2>
+        </div>}
       </div>
     </div>
   );

@@ -24,25 +24,15 @@ function SideBar() {
       icon: <HiOutlineSquare3Stack3D />,
       path: '/dashboard/explore'
     },
-    {
-      id: 3,
-      name: 'Upgrade',
-      icon: <HiOutlineShieldCheck />,
-      path: '/dashboard/upgrade'
-    },
-    {
-      id: 4,
-      name: 'Logout',
-      icon: <HiOutlineLogout />,
-      path: '/dashboard/logout'
-    }
   ];
 
   const path = usePathname();
 
   return (
     <div className='fixed h-full md:w-64 p-5 shadow:md'>
-      <Image src={'/logo2.png'} width={70} height={40} alt='logo' />
+      <Link href={"/"}>
+        <Image src={"/logo2.png"} width={80} height={30} alt="logo" />
+      </Link>
       <hr className='my-5' />
 
       <ul>

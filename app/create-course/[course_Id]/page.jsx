@@ -63,7 +63,9 @@ function CourseLayout({ params }) {
           let videoId = "";
 
           // Generate video URL
+          console.log("Fetching videos for:", course?.name + ":" + chapter?.chapterName);
           const videos = await Service.getVideos(course?.name + ":" + chapter?.chapterName);
+          console.log("Videos fetched:", videos);
           videoId = videos[0]?.id?.videoId;
 
           // Generate Chapter Content
